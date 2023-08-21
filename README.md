@@ -9,8 +9,8 @@ To develop a neural network regression model for the given dataset.
 Explain the problem statement
 
 ## Neural Network Model
+![image](https://github.com/ShamRathan/basic-nn-model/assets/93587823/25a8f032-a6bd-4d06-a7b9-bb5511609711)
 
-Include the neural network model diagram.
 
 ## DESIGN STEPS
 
@@ -43,25 +43,102 @@ Plot the performance plot
 Evaluate the model with the testing data.
 
 ## PROGRAM
+```
+Program developed by: Someasvar.R
+Register Number: 212221230103
+```
+### Importing Modules:
+```
+from google.colab import auth
+import gspread
+from google.auth import default
 
-Include your code here
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import MinMaxScaler
+from tensorflow.keras.models import Sequential as Seq
+from tensorflow.keras.layers import Dense as Den
+
+from tensorflow.keras.metrics import RootMeanSquaredError as rmse
+
+import pandas as pd
+import matplotlib.pyplot as plt
+```
+### Authenticate & Create Dataframe using Data in Sheets:
+```
+auth.authenticate_user()
+creds, _ = default()
+gc = gspread.authorize(creds)
+
+sheet = gc.open('SomDocs DL-01').sheet1 
+rows = sheet.get_all_values()
+
+df = pd.DataFrame(rows[1:], columns=rows[0])
+df = df.astype({'Input':'float'})
+df = df.astype({'Output':'float'})
+```
+### Assign X and Y values:
+```
+x = df[["Input"]] .values
+y = df[["Output"]].values
+```
+### Normalize the values & Split the data::
+```
+scaler = MinMaxScaler()
+scaler.fit(x)
+x_n = scaler.fit_transform(x)
+x_train,x_test,y_train,y_test = train_test_split(x_n,y,test_size = 0.3,random_state = 3)
+```
+
+### Create a Neural Network & Train it:
+```
+ai_brain = Seq([
+    Den(9,activation = 'relu',input_shape=[1]),
+    Den(16,activation = 'relu'),
+    Den(1),
+])
+
+ai_brain.compile(optimizer = 'rmsprop',loss = 'mse')
+
+ai_brain.fit(x_train,y_train,epochs=1000)
+ai_brain.fit(x_train,y_train,epochs=1000)
+```
+
+### Plot the Loss:
+```
+loss_plot = pd.DataFrame(ai_brain.history.history)
+loss_plot.plot()
+```
+
+### Evaluate the model:
+```
+err = rmse()
+preds = ai_brain.predict(x_test)
+err(y_test,preds)
+```
+### Predict for some value:
+```
+x_n1 = [[9]]
+x_n_n = scaler.transform(x_n1)
+ai_brain.predict(x_n_n)
+```
 
 ## Dataset Information
+![image](https://github.com/ShamRathan/basic-nn-model/assets/93587823/8ad848aa-c96b-4de8-9061-70ef29c0e714)
 
-Include screenshot of the dataset
 
 ## OUTPUT
 
 ### Training Loss Vs Iteration Plot
+![image](https://github.com/ShamRathan/basic-nn-model/assets/93587823/ae931de0-18ac-426a-b7fc-fb9040cc4e55)
 
-Include your plot here
 
 ### Test Data Root Mean Squared Error
+![image](https://github.com/ShamRathan/basic-nn-model/assets/93587823/6059072b-cacb-4b9c-a718-3aee60f3b065)
 
-Find the test data root mean squared error
 
 ### New Sample Data Prediction
+![image](https://github.com/ShamRathan/basic-nn-model/assets/93587823/cd2e33c7-4da4-4419-ada3-c293218eab73)
 
-Include your sample input and output here
 
-## RESULT
+## RESULT:
+Thus to develop a neural network regression model for the dataset created is successfully executed.
