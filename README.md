@@ -136,11 +136,13 @@ ai_brain.predict(x_n_n)
 
 
 ### Test Data Root Mean Squared Error
-![image](https://github.com/ShamRathan/basic-nn-model/assets/93587823/6059072b-cacb-4b9c-a718-3aee60f3b065)
+![image](https://github.com/ShamRathan/basic-nn-model/assets/93587823/9ba62df3-2c69-4bb4-bc95-60f1ebb017b9)
+
 
 
 ### New Sample Data Prediction
-![image](https://github.com/ShamRathan/basic-nn-model/assets/93587823/cd2e33c7-4da4-4419-ada3-c293218eab73)
+![image](https://github.com/ShamRathan/basic-nn-model/assets/93587823/588622b9-b574-411c-b488-afd96c73ff6a)
+
 
 
 ## RESULT:
